@@ -1,0 +1,21 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui
+  labels:
+    app: crawler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crawler
+  template:
+    metadata:
+      name: ui
+      labels:
+        app: crawler
+    spec:
+      containers:
+      - image: daniilrostov/ui:1.0
+        name: ui

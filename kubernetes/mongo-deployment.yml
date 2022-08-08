@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo
+  labels:
+    app: crawler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crawler
+  template:
+    metadata:
+      name: mongo
+      labels:
+        app: crawler
+    spec:
+      containers:
+      - image: mongo:5.0
+        name: mongo
+        volumeMounts:
+        - name: mongo-persistent-storage
+          mountPath: /data/db
+        env:
+        - name: MONGO_PORT
+          value: '27017'
+      volumes:
+      - name: mongo-persistent-storage
+        emptyDir: {}

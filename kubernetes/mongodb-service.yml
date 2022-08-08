@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo
+  labels:
+    app: crawler
+spec:
+  ports:
+  - name: one
+    port: 27017
+    protocol: TCP
+    targetPort: 27017
+  selector:
+    app: crawler

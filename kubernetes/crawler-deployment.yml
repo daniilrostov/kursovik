@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crawler
+  labels:
+    app: crawler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crawler
+  template:
+    metadata:
+      name: crawler
+      labels:
+        app: crawler
+    spec:
+      containers:
+      - image: daniilrostov/crawler:1.0
+        name: crawler
+        env:
+        - name: EXCLUDE_URLS
+          value: .*github.com
