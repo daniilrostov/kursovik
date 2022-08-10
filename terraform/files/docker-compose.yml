@@ -4,7 +4,7 @@ web:
   hostname: 'gitlab.example.com'
   environment:
     GITLAB_OMNIBUS_CONFIG: |
-      external_url 'http://${yandex_compute_instance.gitlab.network_interface.0.nat_ip_address}'
+      external_url 'http://external_ip'
   ports:
     - '80:80'
     - '443:443'

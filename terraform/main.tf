@@ -27,6 +27,7 @@ resource "yandex_compute_instance" "gitlab" {
   boot_disk {
     initialize_params {
       image_id = var.gitlab_disk_image
+      size = 50
     }
   }
 
@@ -57,7 +58,9 @@ resource "yandex_compute_instance" "gitlab" {
     source      = "./files/docker-compose.yml"
     destination = "/tmp/docker-compose.yml"
   }
-
+  provisioner "remote-exec" {
+    inline = [ "sed -i 's/external_ip/${yandex_compute_instance.gitlab.network_interface.0.nat_ip_address}/' /tmp/docker-compose.yml" ]
+  }
   provisioner "remote-exec" {
     script = "./files/deploy_gitlab.sh"
   }
