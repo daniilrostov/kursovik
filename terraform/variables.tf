@@ -23,3 +23,9 @@ variable "service_account_key_file" {
 variable subnet_id {
   description = "Subnets for gitlab"
 }
+variable network_id {
+  description = "Network ID"
+}
+variable sa_id {
+  description = "Service account ID"
+}
