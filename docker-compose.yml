@@ -24,4 +24,10 @@ services:
     ports:
       - '8000:8000'
   
-
+  prometheus:
+    build: ./monitoring
+    container_name: 'prometheus'
+  
+  grafana:
+    image: grafana/grafana
+    container_name: 'grafana'
