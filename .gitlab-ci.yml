@@ -29,12 +29,7 @@ deploy_dev_job:
   stage: review
   when: manual
   script:
-    - docker tag kursovik_ui daniilrostov/ui:latest
-    - docker tag kursovik_crawler daniilrostov/crawler:latest
-    - docker tag kursovik_prometheus daniilrostov/prometheus:latest
-    - docker push daniilrostov/ui:latest
-    - docker push daniilrostov/crawler:latest
-    - docker push daniilrostov/prometheus:latest
+    - /bin/bash ./files/review.sh
   environment: 
     name: dev 
     url: http://dev.otus.space
@@ -42,25 +37,7 @@ deploy_dev_job:
 deploy_production_job: 
   stage: production 
   script: 
-    - docker tag kursovik_ui daniilrostov/ui:1.0
-    - docker tag kursovik_crawler daniilrostov/crawler:1.0
-    - docker tag kursovik_prometheus daniilrostov/prometheus:1.0
-    - docker push daniilrostov/ui:1.0
-    - docker push daniilrostov/crawler:1.0
-    - docker push daniilrostov/prometheus:1.0
-    - kubectl apply -f ${PWD}/kubernetes/mongo-deployment.yml --kubeconfig=/opt/kubeconfig
-    - kubectl apply -f ${PWD}/kubernetes/mongo-service.yml --kubeconfig=/opt/kubeconfig
-    - kubectl apply -f ${PWD}/kubernetes/rabbitmq-deployment.yml --kubeconfig=/opt/kubeconfig
-    - kubectl apply -f ${PWD}/kubernetes/rabbitmq-service.yml --kubeconfig=/opt/kubeconfig
-    - kubectl apply -f ${PWD}/kubernetes/crawler-deployment.yml --kubeconfig=/opt/kubeconfig
-    - kubectl apply -f ${PWD}/kubernetes/crawler-service.yml --kubeconfig=/opt/kubeconfig
-    - kubectl apply -f ${PWD}/kubernetes/ui-deployment.yml --kubeconfig=/opt/kubeconfig
-    - kubectl apply -f ${PWD}/kubernetes/ui-service.yml --kubeconfig=/opt/kubeconfig
-    - kubectl apply -f ${PWD}/kubernetes/ingress.yml --kubeconfig=/opt/kubeconfig
-    - kubectl apply -f ${PWD}/kubernetes/prometheus-deployment.yml --kubeconfig=/opt/kubeconfig
-    - kubectl apply -f ${PWD}/kubernetes/prometheus-service.yml --kubeconfig=/opt/kubeconfig
-    - kubectl apply -f ${PWD}/kubernetes/grafana-deployment.yml --kubeconfig=/opt/kubeconfig
-    - kubectl apply -f ${PWD}/kubernetes/grafana-service.yml --kubeconfig=/opt/kubeconfig
+    - /bin/bash ./files/deploy_production_job.sh
   environment: 
     name: production 
     url: http://otus.space 
