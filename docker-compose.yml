@@ -28,9 +28,9 @@ services:
     image: grafana/grafana
     container_name: 'grafana'
     volumes:
-      - ./data/grafana.ini:/etc/grafana/grafana.ini
-      - ./data/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
-      - ./data/node-exporter-full.json:/usr/share/grafana/node-exporter-full.json
+      - ./monitoring/grafana.ini:/etc/grafana/grafana.ini
+      - ./monitoring/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+      - ./monitoring/node-exporter-full.json:/usr/share/grafana/node-exporter-full.json
     ports:
       - '3000:3000'
     links:
