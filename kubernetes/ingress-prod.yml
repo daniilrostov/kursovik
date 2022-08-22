@@ -8,7 +8,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-    - host: prod.otus.space
+    - host: otus.space
       http:
         paths:
         - path: /
