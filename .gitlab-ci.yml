@@ -27,25 +27,23 @@ test_unit_crawler_job:
 
 deploy_dev_job:
   stage: review
-  when: manual
   script:
-    - /bin/bash ./files/review.sh
+    - /bin/bash ./files/deploy_development_job.sh
   environment: 
     name: dev 
     url: http://dev.otus.space
 
 deploy_production_job: 
-  stage: production 
+  stage: production
+  when: manual
   script: 
     - /bin/bash ./files/deploy_production_job.sh
   environment: 
     name: production 
-    url: http://otus.space 
+    url: http://prod.otus.space 
 
 cleanup_job:
   stage: cleanup
   script:
     - docker-compose down --rm local
   when: always
-
-  
