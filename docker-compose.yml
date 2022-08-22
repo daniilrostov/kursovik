@@ -26,16 +26,12 @@ services:
       - '8080:8000'
   
   prometheus:
-    build: ./monitoring
+    build: ./prometheus
     container_name: 'prometheus'
   
   grafana:
-    image: grafana/grafana
+    build: ./grafana
     container_name: 'grafana'
-    volumes:
-      - ./monitoring/grafana.ini:/etc/grafana/grafana.ini
-      - ./monitoring/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
-      - ./monitoring/node-exporter-full.json:/usr/share/grafana/node-exporter-full.json
     ports:
       - '3000:3000'
     links:
