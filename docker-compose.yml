@@ -14,11 +14,11 @@ services:
     container_name: crawler
     environment:
       - EXCLUDE_URLS=.*github.com
-    logging:
-      driver: "fluentd"
-      options:
-        fluentd-address: fluentd:24224
-        tag: service.crawler
+    # logging:
+    #   driver: "fluentd"
+    #   options:
+    #     fluentd-address: fluentd:24224
+    #     tag: service.crawler
   ui:
     build: ./search_engine_ui
     container_name: ui
@@ -37,32 +37,32 @@ services:
     links:
       - prometheus
 
-  fluentd:
-    build: ./logging
-    container_name: 'fluentd'
-    links:
-      - "elasticsearch"
-    ports:
-      - "24224:24224"
-      - "24224:24224/udp"
+  # fluentd:
+  #   build: ./logging
+  #   container_name: 'fluentd'
+  #   links:
+  #     - "elasticsearch"
+  #   ports:
+  #     - "24224:24224"
+  #     - "24224:24224/udp"
 
-  elasticsearch:
-    image: elasticsearch:8.3.3
-    container_name: 'elasticsearch'
-    environment:
-      - ELASTIC_CLUSTER=false
-      - CLUSTER_NODE_MASTER=true
-      - CLUSTER_MASTER_NODE_NAME=es01
-      - discovery.type=single-node
-    expose:
-      - 9200
-    ports:
-      - "9200:9200"
+  # elasticsearch:
+  #   image: elasticsearch:8.3.3
+  #   container_name: 'elasticsearch'
+  #   environment:
+  #     - ELASTIC_CLUSTER=false
+  #     - CLUSTER_NODE_MASTER=true
+  #     - CLUSTER_MASTER_NODE_NAME=es01
+  #     - discovery.type=single-node
+  #   expose:
+  #     - 9200
+  #   ports:
+  #     - "9200:9200"
 
-  kibana:
-    image: kibana:8.3.3
-    container_name: 'kibana'
-    links:
-      - "elasticsearch"
-    ports:
-      - "5601:5601"
+  # kibana:
+  #   image: kibana:8.3.3
+  #   container_name: 'kibana'
+  #   links:
+  #     - "elasticsearch"
+  #   ports:
+  #     - "5601:5601"
