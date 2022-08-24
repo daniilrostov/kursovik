@@ -1,0 +1,5 @@
+terraform.tfvars
+key.json
+backend.tf
+kubeconfig
+ca.pem

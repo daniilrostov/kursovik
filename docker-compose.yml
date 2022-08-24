@@ -1,0 +1,68 @@
+version: '3.3'
+
+services:
+  mongodb:
+    image: mongo:5.0
+    container_name: mongo
+    volumes:
+      - ~/apps/mongo:/data/db
+  rabbitmq:
+    image: 'rabbitmq:3.6-management-alpine'
+    container_name: rabbit
+  crawler:
+    build: ./search_engine_crawler
+    container_name: crawler
+    environment:
+      - EXCLUDE_URLS=.*github.com
+    # logging:
+    #   driver: "fluentd"
+    #   options:
+    #     fluentd-address: fluentd:24224
+    #     tag: service.crawler
+  ui:
+    build: ./search_engine_ui
+    container_name: ui
+    ports:
+      - '8080:8000'
+  
+  prometheus:
+    build: ./prometheus
+    container_name: 'prometheus'
+  
+  grafana:
+    build: ./grafana
+    container_name: 'grafana'
+    ports:
+      - '3000:3000'
+    links:
+      - prometheus
+
+  # fluentd:
+  #   build: ./logging
+  #   container_name: 'fluentd'
+  #   links:
+  #     - "elasticsearch"
+  #   ports:
+  #     - "24224:24224"
+  #     - "24224:24224/udp"
+
+  # elasticsearch:
+  #   image: elasticsearch:8.3.3
+  #   container_name: 'elasticsearch'
+  #   environment:
+  #     - ELASTIC_CLUSTER=false
+  #     - CLUSTER_NODE_MASTER=true
+  #     - CLUSTER_MASTER_NODE_NAME=es01
+  #     - discovery.type=single-node
+  #   expose:
+  #     - 9200
+  #   ports:
+  #     - "9200:9200"
+
+  # kibana:
+  #   image: kibana:8.3.3
+  #   container_name: 'kibana'
+  #   links:
+  #     - "elasticsearch"
+  #   ports:
+  #     - "5601:5601"
