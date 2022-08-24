@@ -16,10 +16,12 @@ spec:
       labels:
         app: ui
     spec:
+      terminationGracePeriodSeconds: 30
       hostname: ui
       containers:
       - name: ui
         image: daniilrostov/ui:1.0
+        imagePullPolicy: "Always"
         env:
         - name: MONGO
           value: mongo

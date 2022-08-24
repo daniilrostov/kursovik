@@ -17,10 +17,12 @@ spec:
         app: crawler
     spec:
       hostname: crawler
+      terminationGracePeriodSeconds: 30
       containers:
       - name: crawler
         image: daniilrostov/crawler:1.0
         name: crawler
+        imagePullPolicy: "Always"
         env:
         - name: EXCLUDE_URLS
           value: .*github.com
