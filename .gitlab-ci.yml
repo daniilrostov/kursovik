@@ -35,12 +35,13 @@ deploy_dev_job:
 
 deploy_production_job: 
   stage: production
-  when: manual
+  only:
+    - master
   script: 
     - /bin/bash ./files/deploy_production_job.sh
   environment: 
     name: production 
-    url: http://prod.otus.space 
+    url: http://otus.space 
 
 cleanup_job:
   stage: cleanup
