@@ -18,10 +18,12 @@ spec:
       labels:
         app: grafana
     spec:
+      terminationGracePeriodSeconds: 30
       hostname: grafana
       containers:
       - name: grafana
-        image: grafana/grafana
+        image: daniilrostov/grafana:${IMAGE_TAG}
+        imagePullPolicy: "Always"
         env:
         - name: GF_SERVER_ROOT_URL
           value: "http://localhost:3000/grafana"
