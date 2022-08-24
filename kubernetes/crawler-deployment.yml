@@ -20,7 +20,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: crawler
-        image: daniilrostov/crawler:1.0
+        image: daniilrostov/crawler:${IMAGE_TAG}
         name: crawler
         imagePullPolicy: "Always"
         env:

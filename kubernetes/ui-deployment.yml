@@ -20,7 +20,7 @@ spec:
       hostname: ui
       containers:
       - name: ui
-        image: daniilrostov/ui:1.0
+        image: daniilrostov/ui:${IMAGE_TAG}
         imagePullPolicy: "Always"
         env:
         - name: MONGO

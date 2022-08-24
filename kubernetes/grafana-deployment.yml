@@ -22,7 +22,7 @@ spec:
       hostname: grafana
       containers:
       - name: grafana
-        image: grafana/grafana
+        image: daniilrostov/grafana:${IMAGE_TAG}
         imagePullPolicy: "Always"
         env:
         - name: GF_SERVER_ROOT_URL
