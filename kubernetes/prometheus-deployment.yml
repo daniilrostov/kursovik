@@ -19,7 +19,7 @@ spec:
       hostname: prometheus
       containers:
       - name: prometheus
-        image: daniilrostov/prometheus:1.0
+        image: daniilrostov/prometheus:${IMAGE_TAG}
         env:
         - name: ui
           value: ui
